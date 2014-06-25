@@ -10,6 +10,7 @@ var p = require('commander')
 
 p.version('0.0.1')
 	.option('-p, --project <project>', 'Specify the BigQuery project')
+	.option('-P, --print', 'print output to stdout and no insert bigquery')
 	.option('-d, --dataset <dsname>', 'Specify the dataset name')
 	.option('-q, --query <command>', 'Specify the sql command you want input')
 	.option('-t, --table <tablename>', 'Specify the table name')
@@ -46,6 +47,10 @@ function sqlQuery() {
 			console.log('[Error] Query Error: %s',JSON.stringify(err));
 			process.exit(1);
 		}
+    if(p.print) {
+      console.log(rows);
+      process.exit(0);
+    }
 		bq.getBqTable(tableName, prjId, dsName, function(r){
 			var result = JSON.parse(r);
 			if(result.error && result.error.code == 404){
