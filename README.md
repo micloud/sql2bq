@@ -6,8 +6,7 @@ Query data from SQL DB and dump data into bigquery.
 ### Install
 
 ```
-git clone https://github.com/charlesfan/sql2bq.git
-cd sql2bq && npm install
+npm install sql2bq --save
 ```
 
 ### Create Config File
@@ -43,7 +42,7 @@ Check your config file and start use this sdk.
 
 You can just use sql command to query your data from SQL DB and upload to your bq.
 ```
-node bin/mysql.js -q 'select * from <db_table>' -t <bq_name>
+sql2bq-load -q 'select * from <db_table>' -t <bq_name>
 ```
 The operation: -q and -t are require when you use this sdk. We provide some operations in this sdk:
 ```
